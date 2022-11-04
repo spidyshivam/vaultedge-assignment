@@ -3,6 +3,8 @@ from fastapi import FastAPI
 
 from PyPDF2 import PdfReader, PdfWriter
 
+import uvicorn
+
 app = FastAPI()
 
 @app.post('/pdf/{pdf_file}')
@@ -37,3 +39,6 @@ def rotate(pdf_file_path: str, page_no: int, rotation: int):
         writer.write(file)
 
     return output_file
+
+if __name__ == "__main__":
+    uvicorn.run('app:app', port=5000, log_level='info')
